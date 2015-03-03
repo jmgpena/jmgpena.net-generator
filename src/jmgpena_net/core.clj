@@ -1,21 +1,15 @@
 (ns jmgpena-net.core
   (:require [stasis.core :as stasis]
-            [hiccup.page :refer [html5]]))
+            [hiccup.util :as hu]
+            [hiccup.page :refer [html5]]
+            [me.raynes.cegdown :as md]
+            [garden.core :refer [css]]
+            [jmgpena-net.web :as web]))
 
 (def target-dir "export")
 
-(def index-page
-  (html5
-   [:head
-    [:meta {:charset "utf-8"}]
-    [:title "jmgpena.net"]]
-   [:body
-    [:h1 "jmgpena.net"]]))
-
-(def pages {"/index.html" index-page})
-
-(def app (stasis/serve-pages pages))
+(def app (stasis/serve-pages web/pages))
 
 (defn export []
   (stasis/empty-directory! target-dir)
-  (stasis/export-pages pages target-dir))
+  (stasis/export-pages web/pages target-dir))
