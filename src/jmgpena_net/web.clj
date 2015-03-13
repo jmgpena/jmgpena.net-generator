@@ -27,6 +27,9 @@
 (defn- extract-meta-block [page]
   (->> page (re-seq #"(?is)^---(.*?)---") first second))
 
+(defn- extract-meta-value [meta value]
+  (->> meta (re-seq (re-pattern (str value "\\s*:\\s*(.*)"))) first second))
+
 (defn- extract-title [meta]
   (->> meta (re-seq #"title\s*:\s*(.*)") first second))
 
@@ -37,7 +40,7 @@
 
 (defn generate-link-from-page [page]
   (let [meta-section (extract-meta-block (val page))]
-    (when (seq meta-section)
+    (when (and (seq meta-section) (= (extract-meta-value meta-section "link") "yes"))
       (vector (key page) (extract-title meta-section)))))
 
 (defn generate-menu [pages]
@@ -55,7 +58,7 @@
             :rel "stylesheet" :type "text/css"}]
     [:link {:href "main.css" :media "all" :rel "stylesheet" :type "text/css"}]]
    [:body
-    [:div#header "jmgpena.net"]
+    [:div#header [:a {:href "/"} "jmgpena.net"]]
     [:div#menu menu]
     [:div#content content]]))
 
