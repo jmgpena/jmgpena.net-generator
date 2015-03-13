@@ -1,6 +1,7 @@
 (ns jmgpena-net.css
   (:require [stasis.core :as stasis]
             [garden.core :refer [css]]
+            [garden.units :as u :refer [px]]
             [clojure.string :as str]))
 
 ;; solarized colors
@@ -45,17 +46,55 @@
     {:content "none"}]
    [:table {:border-collapse "collapse" :border-spacing "0"}]))
 
+;; typography
+(defn- typography []
+  (css
+   [:body {:font-size (px 16)
+           :line-height (px 22)
+           :max-width (px 760)
+           :margin "0 auto"}]
+   [:h1 {:font-size (px 54)
+         :line-height (px 66)
+         :margin-top (px 44)
+         :margin-bottom (px 22)}]
+   [:h2 {:font-size (px 36)
+         :line-height (px 44)
+         :margin-top (px 44)
+         :margin-bottom (px 22)}]
+   [:h3 {:font-size (px 24)
+         :line-height (px 44)
+         :margin-top (px 22)
+         :margin-bottom (px 22)}]
+   [:h4 {:font-size (px 16)
+         :line-height (px 22)
+         :margin-top (px 22)
+         :margin-bottom (px 22)}]
+   [:p :ul :ol :pre :table :blockquote {:margin-top (px 22)
+                                        :margin-bottom (px 22)}]
+   [:hr {:border "1px solid"
+         :margin "-1px 0"}]
+   [:ul :ol [:ul :ol {:margin-top "0" :margin-bottom "0"}]]
+   [:b :strong :em :small :code {:line-height "1"}]
+   [:sup :sub {:vertical-align "baseline"
+               :position "relative"
+               :top "-0.4em"}]
+   [:sub {:top "0.4em"}]))
+
 ;; main css file
 (defn main-style []
   (str
    (reset)
+   (typography)
    (css
-       [:body {:background-color (colors :base3)
-               :color (colors :base03)}]
-       [:a {:color (colors :blue)}
-        [:&:visited {:color (colors :violet)}]]
-       [:div#header {:font-family "Acme, sans-serif"
-                     :font-size "1.6rem"
-                     :font-weight "bold"}])))
+    [:body {:background-color (colors :base3)
+            :color (colors :base03)}]
+    [:a {:color (colors :blue)}
+     [:&:visited {:color (colors :violet)}]]
+    [:div#header {:font-family "Acme, sans-serif"
+                  :font-size "1.6rem"
+                  :font-weight "bold"}
+     [:a {:color (colors :base03)
+          :text-decoration "none"}
+      [:&:visited {:color (colors :base03)}]]])))
 
 
