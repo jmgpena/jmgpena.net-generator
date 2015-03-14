@@ -1,7 +1,7 @@
 (ns jmgpena-net.css
   (:require [stasis.core :as stasis]
             [garden.core :refer [css]]
-            [garden.units :as u :refer [px]]
+            [garden.units :as u :refer [px em]]
             [clojure.string :as str]))
 
 ;; solarized colors
@@ -92,9 +92,20 @@
      [:&:visited {:color (colors :violet)}]]
     [:div#header {:font-family "Acme, sans-serif"
                   :font-size "1.6rem"
-                  :font-weight "bold"}
+                  :font-weight "bold"
+                  :float "left"
+                  :margin-right (em 2)
+                  :margin-bottom (px 22)
+                  :margin-top (px 22)}
      [:a {:color (colors :base03)
           :text-decoration "none"}
-      [:&:visited {:color (colors :base03)}]]])))
+      [:&:visited {:color (colors :base03)}]]]
+    [:div#menu {:float "left"}
+     [:ul {:border-bottom (str "2px solid " (colors :base03))}
+      [:li {:display "inline-block"
+            :margin-left (em 0.5)
+            :margin-right (em 0.5)}
+       [:a {:text-decoration "none"}]]]]
+    [:div#content {:clear "both"}])))
 
 
