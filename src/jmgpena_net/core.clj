@@ -8,7 +8,7 @@
 
 (def target-dir "export")
 
-(def app (stasis/serve-pages web/pages))
+(def app (stasis/serve-pages (web/pages)))
 
 (defn export []
   (stasis/empty-directory! target-dir)

@@ -7,7 +7,7 @@
             [clojure.string :as str]
             [jmgpena-net.css :as css]))
 
-(def md-pages
+(defn md-pages []
   (stasis/slurp-directory "resources/pages" #".*\.md$"))
 
 (defn generate-urls [pages]
@@ -73,4 +73,4 @@
                      (map (partial main-tpl menu)))]
     (zipmap urls content)))
 
-(def pages (assoc (get-html-pages md-pages) "/main.css" (css/main-style)))
+(defn pages [] (assoc (get-html-pages (md-pages)) "/main.css" (css/main-style)))

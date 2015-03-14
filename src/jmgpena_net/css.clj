@@ -20,6 +20,10 @@
              :green   "#859900"
              })
 
+
+(def title-font "Verdana, Geneva, sans-serif")
+(def body-font "Georgia, Times, 'Times New Roman', serif")
+
 ;; reset (Eric Meyer)
 (defn- reset []
   (css
@@ -52,7 +56,9 @@
    [:body {:font-size (px 16)
            :line-height (px 22)
            :max-width (px 760)
-           :margin "0 auto"}]
+           :margin "0 auto"
+           :font-family body-font}]
+   [:h1 :h2 :h3 :h4 :h5 :h6 {:font-family title-font}]
    [:h1 {:font-size (px 54)
          :line-height (px 66)
          :margin-top (px 44)
@@ -71,6 +77,7 @@
          :margin-bottom (px 22)}]
    [:p :ul :ol :pre :table :blockquote {:margin-top (px 22)
                                         :margin-bottom (px 22)}]
+   [:pre {:font-family "'Courier New', Courier, monospace"}]
    [:hr {:border "1px solid"
          :margin "-1px 0"}]
    [:ul :ol [:ul :ol {:margin-top "0" :margin-bottom "0"}]]
@@ -100,12 +107,15 @@
      [:a {:color (colors :base03)
           :text-decoration "none"}
       [:&:visited {:color (colors :base03)}]]]
-    [:div#menu {:float "left"}
+    [:div#menu {:float "left"
+                :font-family title-font
+                :font-weight "bold"}
      [:ul {:border-bottom (str "2px solid " (colors :base03))}
       [:li {:display "inline-block"
             :margin-left (em 0.5)
             :margin-right (em 0.5)}
-       [:a {:text-decoration "none"}]]]]
+       [:a {:text-decoration "none"
+            :color (colors :base02)}]]]]
     [:div#content {:clear "both"}])))
 
 
