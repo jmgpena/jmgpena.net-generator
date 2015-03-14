@@ -11,5 +11,9 @@
                  [garden "1.2.5"]
                  [org.clojure/tools.nrepl "0.2.7"]]
   :plugins [[lein-ring "0.9.2"]]
-  :ring {:handler jmgpena-net.core/app}
+  :ring {:handler jmgpena-net.core/app
+         :auto-reload? true
+         :auto-refresh? true
+         :reload-paths ["resources/pges"]}
+  :resource-paths ["resources"]
   :aliases {"build-site" ["run" "-m" "jmgpena-net.core/export"]})
