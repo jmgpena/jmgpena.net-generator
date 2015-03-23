@@ -62,6 +62,9 @@
     [:div#menu menu]
     [:div#content content]]))
 
+(defn convert-md [md]
+  (md/to-html md [:definitions :tables]))
+
 ;;(def pages (md/to-html (slurp "resources/about.md")))
 (defn get-html-pages [pages]
   (let [urls (generate-urls pages)
@@ -69,7 +72,7 @@
         content (->> pages
                      (vals)
                      (map remove-meta)
-                     (map md/to-html)
+                     (map convert-md)
                      (map (partial main-tpl menu)))]
     (zipmap urls content)))
 
