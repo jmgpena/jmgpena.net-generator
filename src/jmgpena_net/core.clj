@@ -12,4 +12,4 @@
 
 (defn export []
   (stasis/empty-directory! target-dir)
-  (stasis/export-pages web/pages target-dir))
+  (stasis/export-pages (web/pages) target-dir))
