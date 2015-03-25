@@ -3,7 +3,10 @@ lein: lein2
 script: lein2 build-site
 branches:
   only:
-    - master
+  - master
 jdk:
-  - openjdk7
-  - openjdk6
+- openjdk7
+- openjdk6
+before_install:
+- openssl aes-256-cbc -K $encrypted_e43503f12f7e_key -iv $encrypted_e43503f12f7e_iv
+  -in deploy_key.enc -out deploy_key -d
